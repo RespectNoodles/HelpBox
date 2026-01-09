@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "registry": [
+    {
+      "name": "nmap",
+      "category": "networking",
+      "description": "Network exploration and security auditing tool.",
+      "install": "apt-get install -y nmap",
+      "update": "apt-get update -y && apt-get install -y nmap",
+      "verify": "nmap --version",
+      "docs": "https://nmap.org/book/man.html",
+      "requires_root": true,
+      "source": "apt"
+    },
+    {
+      "name": "jq",
+      "category": "data",
+      "description": "Command-line JSON processor.",
+      "install": "apt-get install -y jq",
+      "update": "apt-get update -y && apt-get install -y jq",
+      "verify": "jq --version",
+      "docs": "https://jqlang.github.io/jq/",
+      "requires_root": true,
+      "source": "apt"
+    },
+    {
+      "name": "httpx",
+      "category": "web",
+      "description": "Fast and multi-purpose HTTP toolkit.",
+      "install": "pip install --user httpx",
+      "update": "pip install --upgrade --user httpx",
+      "verify": "python -m httpx --version",
+      "docs": "https://www.python-httpx.org/",
+      "requires_root": false,
+      "source": "pip"
+    },
+    {
+      "name": "rich-cli",
+      "category": "utilities",
+      "description": "Rich CLI tools including rich and markdown renderers.",
+      "install": "pip install --user rich-cli",
+      "update": "pip install --upgrade --user rich-cli",
+      "verify": "rich --version",
+      "docs": "https://github.com/Textualize/rich",
+      "requires_root": false,
+      "source": "pip"
+    },
+    {
+      "name": "gosec",
+      "category": "security",
+      "description": "Golang security checker.",
+      "install": "go install github.com/securego/gosec/v2/cmd/gosec@latest",
+      "update": "go install github.com/securego/gosec/v2/cmd/gosec@latest",
+      "verify": "gosec --version",
+      "docs": "https://github.com/securego/gosec",
+      "requires_root": false,
+      "source": "go"
+    },
+    {
+      "name": "cargo-audit",
+      "category": "security",
+      "description": "Audit Cargo.lock for vulnerable dependencies.",
+      "install": "cargo install cargo-audit",
+      "update": "cargo install cargo-audit --force",
+      "verify": "cargo audit --version",
+      "docs": "https://github.com/rustsec/rustsec/tree/main/cargo-audit",
+      "requires_root": false,
+      "source": "cargo"
+    },
+    {
+      "name": "bat",
+      "category": "utilities",
+      "description": "A cat clone with syntax highlighting and Git integration.",
+      "install": "curl -Ls https://github.com/sharkdp/bat/releases/latest/download/bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C \"{prefix}/tmp\" && cp \"{prefix}/tmp/bat-v0.24.0-x86_64-unknown-linux-gnu/bat\" \"{prefix}/bin/\"",
+      "update": "curl -Ls https://github.com/sharkdp/bat/releases/latest/download/bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C \"{prefix}/tmp\" && cp \"{prefix}/tmp/bat-v0.24.0-x86_64-unknown-linux-gnu/bat\" \"{prefix}/bin/\"",
+      "verify": "bat --version",
+      "docs": "https://github.com/sharkdp/bat",
+      "requires_root": false,
+      "source": "git"
+    }
+  ]
+}
