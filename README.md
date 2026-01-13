@@ -1,4 +1,3 @@
-const manual = `
 # Egman23 Toolbox Manual
 
 > A portable, project-local tool registry and installer with a friendly CLI.
