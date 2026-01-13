@@ -1,11 +1,3 @@
-/*
- * Egman23 Toolbox Manual
- *
- * This README.md manual written in JS-style comments
- * It can live in codebases that like everything to be "code."
- * You can open it with any text editor, or run `node README.md` to print it.
- */
-
 const manual = `
 # Egman23 Toolbox Manual
 
