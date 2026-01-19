@@ -1,16 +1,16 @@
-## Banner
+<!-- Banner -->
 <h1 align="center">
   Egman23
   <br>
   Toolbox
 </h1>
 
-## Banner Image
+<!-- Banner Image --> 
 ![](/images/egman-toolbox-bg.png)
 ## Catch Phrase
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
 
-## Links to socials using badges
+<!-- Links For Badges -->  
 <p align="center">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
 <a href="https://github.com/RespectNoodles/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
@@ -19,7 +19,7 @@
 <a href="https://discord.com/users/perish5514"><img src="https://img.shields.io/discord/695645237418131507.svg?logo=discord"></a>
 </p>
 
-
+<!-- Social Links -->  
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#usage">Usage</a> •
