@@ -1,9 +1,12 @@
-## Banner Image
+## Banner
 <h1 align="center">
-  ![](/images/egman-toolbox-bg.png)
+  Egman23
   <br>
+  Toolbox
 </h1>
 
+## Banner Image
+![](/images/egman-toolbox-bg.png)
 ## Catch Phrase
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
 
