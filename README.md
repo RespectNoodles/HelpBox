@@ -1,8 +1,6 @@
 <h1 align="center">
   <br>
 </h1>
-<img ="/images/egman-toolbox-bg-resized.png" width="200px" alt="title-resized"></a>   
-![](/images/egman-toolbox-bg-resized.png"
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
 
 
@@ -27,7 +25,9 @@
 
 
 # Egman23 Toolbox Manual
+<img="/images/egman-toolbox-bg-resized.png" width="200px" alt="title-resized"></a>   
 
+![](/images/egman-toolbox-bg-resized.png"
 
 ---
 
