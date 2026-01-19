@@ -1,14 +1,15 @@
 <!-- Banner -->
 <h1 align="center">
-  Egman23
-  <br>
-  Toolbox
 </h1>
+
 
 <!-- Banner Image --> 
 ![](/images/egman-toolbox-bg.png)
-## Catch Phrase
+
+
+<!-- Catch Phrase -->  
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
+
 
 <!-- Links For Badges -->  
 <p align="center">
@@ -19,6 +20,7 @@
 <a href="https://discord.com/users/perish5514"><img src="https://img.shields.io/discord/695645237418131507.svg?logo=discord"></a>
 </p>
 
+
 <!-- Social Links -->  
 <p align="center">
   <a href="#features">Features</a> •
@@ -28,12 +30,17 @@
 </p>
 
 
----
-
-
-# Egman23 Toolbox Manual   
+--- 
 
 ![](/images/egman-toolbox-bg-resized.png)
+<h1> Made By 
+  <br>
+  | Egman23 | 
+  <br>
+      | Perish | 
+  <br>
+          | RespectNoodles | 
+</h1>
 
 ---
 
