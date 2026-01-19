@@ -24,10 +24,9 @@
 ---
 
 
-# Egman23 Toolbox Manual
-<img="/images/egman-toolbox-bg-resized.png" width="200px" alt="title-resized"></a>   
+# Egman23 Toolbox Manual   
 
-![](/images/egman-toolbox-bg-resized.png"
+![](/images/egman-toolbox-bg-resized.png)
 
 ---
 
