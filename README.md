@@ -1,6 +1,7 @@
 <h1 align="center">
   <br>
-<img src=".vscode/images/egman-toolbox-bg-resized.png" width="200px" alt="title-resized"></a>
+<img =".vscode/images/egman-toolbox-bg-resized.png" width="200px" alt="title-resized"></a>
+  ![title-resized](/images/egman-toolbox-bg-resized.png")   
 </h1>
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
 
