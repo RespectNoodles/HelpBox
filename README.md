@@ -1,14 +1,18 @@
+## Banner Image
 <h1 align="center">
+  ![](/images/egman-toolbox-bg.png)
   <br>
 </h1>
+
+## Catch Phrase
 <h4 align="center">A portable, project-local tool registry and installer with a friendly CLI</h4>
 
-
+## Links to socials using badges
 <p align="center">
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-_red.svg"></a>
 <a href="https://github.com/RespectNoodles/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <a href="https://goreportcard.com/badge/github.com/RespectNoodles"><img src="https://goreportcard.com/badge/github.com/RespectNoodles/interactsh"></a>
-<a href="https://twitter.com/egman23"><img src="https://img.shields.io/twitter/follow/pdiscoveryio.svg?logo=twitter"></a>
+<a href="https://twitter.com/egman23"><img src="https://img.shields.io/twitter/follow/egman23.svg?logo=twitter"></a>
 <a href="https://discord.com/users/perish5514"><img src="https://img.shields.io/discord/695645237418131507.svg?logo=discord"></a>
 </p>
 
