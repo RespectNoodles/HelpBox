@@ -4,7 +4,7 @@
 
 
 <!-- Banner Image --> 
-![](/images/egman-toolbox-bg.png)
+![](/images/egman-toolbox-bg-resized.png)
 
 
 <!-- Catch Phrase -->  
@@ -32,7 +32,7 @@
 
 --- 
 
-![](/images/egman-toolbox-bg-resized.png)
+
 <h3> Made By 
   <br>
 ||  Egman23  |  Perish  |  RespectNoodles  || 
