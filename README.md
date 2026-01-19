@@ -33,14 +33,10 @@
 --- 
 
 ![](/images/egman-toolbox-bg-resized.png)
-<h1> Made By 
+<h3> Made By 
   <br>
-  | Egman23 | 
-  <br>
-      | Perish | 
-  <br>
-          | RespectNoodles | 
-</h1>
+||  Egman23  |  Perish  |  RespectNoodles  || 
+</h3>
 
 ---
 
