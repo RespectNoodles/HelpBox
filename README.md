@@ -64,6 +64,9 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 - A package manager or tools referenced by your registry entries (e.g., \`apt-get\`)
 
 
+---
+
+
 ## Index
 
 1. [Quick Start](#quick-start)
