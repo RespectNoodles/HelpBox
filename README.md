@@ -36,9 +36,9 @@
 <h3> This Tool Was Made By: 
   <br>
   <br>
-# PERISH
-  # EGMAN23
-    # RESPECTNOODLES
+# PERISH <br>
+  # EGMAN23 <br>
+    # RESPECTNOODLES <br>
 </h3>
 
 
