@@ -79,9 +79,10 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 11. [Verification & Doctor](#verification--doctor)
 12. [Import & Export](#import--export)
 13. [Interactive TUI](#interactive-tui)
-14. [Examples](#examples)
-15. [Troubleshooting](#troubleshooting)
-16. [Cheeky Tips](#cheeky-tips)
+14. [Usage Notes](#usage-notes)
+15. [Examples](#examples)
+16. [Troubleshooting](#troubleshooting)
+17. [Cheeky Tips](#cheeky-tips)
 
 
 ---
@@ -302,6 +303,13 @@ All commands are subcommands on \`tools/toolbox.py\`:
 - **export**: Print registry JSON (or save to file).
 - **import**: Replace registry JSON from a file.
 - **tui**: Interactive selector (requires \`fzf\`).
+- **net ping <host> --count --size --interval**: Ping a host with custom parameters.
+- **net trace <host>**: Trace network path using mtr/traceroute/tracepath.
+- **net dns-test <host>**: Run DNS resolution checks with dig/nslookup/getent.
+- **net speed**: Run a bandwidth test (if speedtest/fast is installed).
+- **net flush-dns**: Flush DNS caches (requires explicit confirmation).
+- **net restart-network**: Restart networking services (requires explicit confirmation).
+- **net mtu-test [host]**: Probe path MTU safely with DF pings (requires confirmation).
 
 
 ---
@@ -406,6 +414,30 @@ python tools/toolbox.py tui
 
 You’ll get a searchable picker. Selecting a tool shows its info panel.
 
+
+---
+
+
+## Usage Notes
+
+- Use \`--dry-run\` to preview commands without running them.
+- Use \`--explain\` to see intent for each step.
+- Network diagnostics are available under \`net\`:
+
+\`\`\`
+python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1
+python tools/toolbox.py net trace example.com
+python tools/toolbox.py net dns-test example.com
+python tools/toolbox.py net speed
+\`\`\`
+
+Guided actions require explicit confirmation:
+
+\`\`\`
+python tools/toolbox.py net flush-dns
+python tools/toolbox.py net restart-network
+python tools/toolbox.py net mtu-test 1.1.1.1
+\`\`\`
 
 ---
 
