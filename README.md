@@ -33,11 +33,12 @@
 --- 
 
 
-<h3> Made By: 
+<h3> This Tool Was Made By: 
   <br>
-|1|  RespectNoodles  || <br>
-|2|   Egman23    || <br>
-|3|  Perish  || <br>
+  <br>
+|1|  ||  RespectNoodles  || <br>
+|2|      || Egman23  || <br>
+|3|      ||  Perish  || <br>
 </h3>
 
 
