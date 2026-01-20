@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import os
 import shutil
@@ -14,6 +15,7 @@ from typing import Any, Dict, Iterable, List, Optional
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "tools" / "registry.json"
 CONFIG_PATH = ROOT / ".config" / "toolbox.json"
+SHELL_INIT_PATH = ROOT / "shell" / "init.sh"
 
 COLOR_CODES = {
     "reset": "\033[0m",
@@ -238,6 +240,89 @@ def doctor(ctx: Context) -> None:
     print(f"Config: {CONFIG_PATH}")
     print(f"Registry: {REGISTRY_PATH}")
     print(f"Prefix: {ctx.prefix}")
+    print()
+    path_doctor(ctx)
+
+def normalize_path_entry(entry: str) -> str:
+    return os.path.expandvars(os.path.expanduser(entry))
+
+
+def path_doctor(ctx: Context) -> None:
+    raw_entries = [entry for entry in os.environ.get("PATH", "").split(os.pathsep) if entry]
+    seen: Dict[str, int] = {}
+    duplicates: List[str] = []
+    missing: List[str] = []
+
+    for entry in raw_entries:
+        normalized = normalize_path_entry(entry)
+        count = seen.get(normalized, 0) + 1
+        seen[normalized] = count
+        if count == 2:
+            duplicates.append(normalized)
+        if not os.path.isdir(normalized):
+            missing.append(normalized)
+
+    print(colorize("PATH diagnostics", "bold", ctx.color))
+    if duplicates:
+        print(colorize("Duplicate PATH entries:", "yellow", ctx.color))
+        for entry in duplicates:
+            print(f"  - {entry}")
+    else:
+        print(colorize("No duplicate PATH entries found.", "green", ctx.color))
+
+    missing_unique = list(dict.fromkeys(missing))
+    if missing_unique:
+        log_warn(ctx, "PATH segments that do not exist:")
+        for entry in missing_unique:
+            print(f"  - {entry}")
+    else:
+        print(colorize("All PATH segments exist.", "green", ctx.color))
+
+
+def detect_shell_rc() -> Path:
+    shell = os.environ.get("SHELL", "")
+    rc_name = ".zshrc" if "zsh" in shell else ".bashrc"
+    return Path.home() / rc_name
+
+
+def backup_file(path: Path) -> Optional[Path]:
+    if not path.exists():
+        return None
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    backup_path = path.with_name(f"{path.name}.bak-{timestamp}")
+    shutil.copy2(path, backup_path)
+    return backup_path
+
+
+def setup_shell(ctx: Context, theme: str) -> None:
+    rc_path = detect_shell_rc()
+    source_line = f'source "{SHELL_INIT_PATH}" --theme {theme}'
+    content = ""
+    if rc_path.exists():
+        content = rc_path.read_text(encoding="utf-8")
+        if source_line in content:
+            log_info(ctx, f"Shell setup already present in {rc_path}.")
+            return
+    updated_lines: List[str] = []
+    replaced = False
+    for line in content.splitlines():
+        if "shell/init.sh" in line:
+            updated_lines.append(source_line)
+            replaced = True
+        else:
+            updated_lines.append(line)
+    if not replaced:
+        if content and not content.endswith("\n"):
+            updated_lines.append("")
+        updated_lines.append(source_line)
+    if updated_lines:
+        updated_lines.append("")
+    backup_path = backup_file(rc_path)
+    rc_path.parent.mkdir(parents=True, exist_ok=True)
+    rc_path.write_text("\n".join(updated_lines), encoding="utf-8")
+    if backup_path:
+        log_info(ctx, f"Backed up {rc_path} to {backup_path}.")
+    log_info(ctx, f"Updated shell configuration at {rc_path}.")
 
 
 def export_registry(output: Optional[Path]) -> None:
@@ -304,6 +389,14 @@ def parse_args() -> argparse.Namespace:
 
     subparsers.add_parser("doctor", help="Check system dependencies")
 
+    setup_parser = subparsers.add_parser("setup", help="Install shell integration")
+    setup_parser.add_argument(
+        "--theme",
+        choices=["minimal", "vivid", "high-contrast"],
+        default="minimal",
+        help="Prompt theme profile",
+    )
+
     export_parser = subparsers.add_parser("export", help="Export registry to JSON")
     export_parser.add_argument("--output", type=str, help="Output file")
 
@@ -350,6 +443,8 @@ def main() -> int:
             return verify_tool(find_tool(tools, args.tool), ctx)
         elif args.command == "doctor":
             doctor(ctx)
+        elif args.command == "setup":
+            setup_shell(ctx, args.theme)
         elif args.command == "export":
             export_registry(Path(args.output) if args.output else None)
         elif args.command == "import":
