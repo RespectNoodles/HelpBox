@@ -33,11 +33,11 @@
 --- 
 
 
-<h3> Made By 
+<h3> Made By: 
   <br>
-|1|  RespectNoodles  ||
-|2|   Egman23    ||
-|3|  Perish  || 
+|1|  RespectNoodles  || <br>
+|2|   Egman23    || <br>
+|3|  Perish  || <br>
 </h3>
 
 
