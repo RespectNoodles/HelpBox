@@ -1,5 +1,6 @@
 <!-- Banner -->
 <h1 align="center">
+HelpBox by Perish
 </h1>
 
 
@@ -27,6 +28,7 @@
   <a href="#usage">Usage</a> •
   <a href="#toolbox-integration">Toolbox Integration</a> •
   
+  
 </p>
 
 
@@ -35,14 +37,15 @@
 <p>
 <h3> This Tool Was Made By: <br>
 
-**PERISH** <br>
-<a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
-<a href="https://www.instagram.com/cj_egg/">**Instagram**</a> <br>
-<a href="https://www.facebook.com/c.j.egan.738639/">**Facebook**</a> <br>
-<a href="https://steamcommunity.com/id/Perishexe/">**Steam**</a> <br>
-<a href="https://discord.com/users/perish5514">Discord</a>
+### <h1> **Perish** </h1> <br>
+- <a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
+- <a href="https://www.instagram.com/cj_egg/">**Instagram**</a> <br>
+- <a href="https://www.facebook.com/c.j.egan.738639/">**Facebook**</a> <br>
+- <a href="https://steamcommunity.com/id/Perishexe/">**Steam**</a> <br>
+- <a href="https://discord.com/users/perish5514">Discord</a>
 </h3>
 
+</p>
 </p>
 
 ---
@@ -81,6 +84,15 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 7.  [Commands](#commands)
 8.  [Flags](#flags)
 9.  [Package Manager Backends](#package-manager-backends)
+1.  [Quick Start](#quick-start)
+2.  [Download & Installation](#download--installation)
+3.  [Concepts](#concepts)
+4.  [Project Layout](#project-layout)
+5.  [Registry Format](#registry-format)
+6.  [Configuration](#configuration)
+7.  [Commands](#commands)
+8.  [Flags](#flags)
+9.  [Package Manager Backends](#package-manager-backends)
 10. [Portable Prefix & PATH](#portable-prefix--path)
 11. [Verification & Doctor](#verification--doctor)
 12. [Import & Export](#import--export)
@@ -88,6 +100,7 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 14. [Usage Notes](#usage-notes)
 15. [Examples](#examples)
 16. [Troubleshooting](#troubleshooting)
+17. [Helpful Tips](#helpful-tips)
 17. [Helpful Tips](#helpful-tips)
 
 
@@ -129,6 +142,7 @@ This part is written like a simple guide for younger learners. Slow and steady!
 
 ### Step 1: Get the project folder
 
+1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 2. Go to the folder where you keep projects.
 3. If someone shared this folder with you, open it. If not, type:
@@ -208,7 +222,13 @@ The toolbox is built on three ideas:
 
 \`\`\`
 ./ <br>
+./ <br>
 ├── .config/
+│   └── toolbox.json         # Local configuration (prefix, colour) <br>
+├── tools/ <br>
+│   ├── registry.json        # Tool registry <br>
+│   └── toolbox.py           # CLI entrypoint <br>
+└── README.js                # This manual 
 │   └── toolbox.json         # Local configuration (prefix, colour) <br>
 ├── tools/ <br>
 │   ├── registry.json        # Tool registry <br>
@@ -223,9 +243,21 @@ The toolbox is built on three ideas:
 ## Registry Format
 
 The registry is a JSON file located at \`tools/registry.json\`. <br>
+The registry is a JSON file located at \`tools/registry.json\`. <br>
 Each tool entry looks like this:
 
 
+\`\`\`json <br>
+{ <br>
+  "name": "jq", <br>
+  "category": "data", <br>
+  "description": "Command-line JSON processor.", <br>
+  "install": "apt-get install -y jq", <br>
+  "update": "apt-get update -y && apt-get install -y jq", <br>
+  "verify": "jq --version", <br>
+  "docs": "<https://jqlang.github.io/jq/>", <br>
+  "requires_root": true, <br>
+  "source": "apt" <br>
 \`\`\`json <br>
 { <br>
   "name": "jq", <br>
@@ -243,6 +275,8 @@ Each tool entry looks like this:
 
 ---
 
+
+## Fields:
 
 ## Fields:
 
@@ -269,8 +303,15 @@ Local configuration lives at \`.config/toolbox.json\`:
   "colour": true <br>
 } <br>
 \`\`\` 
+\`\`\`json <br>
+{ <br>
+  "prefix": "./.tools", <br>
+  "colour": true <br>
+} <br>
+\`\`\` 
 
 - **prefix**: Where portable installs land.
+- **colour**: Toggle ANSI colours on output.
 - **colour**: Toggle ANSI colours on output.
 
 
@@ -283,6 +324,7 @@ You can override \`prefix\` per command using \`--prefix\`.
 ## Commands
 
 
+All commands are sub-commands on \`tools/toolbox.py\`:
 All commands are sub-commands on \`tools/toolbox.py\`:
 
 - **list**: Show all tools and their status.
@@ -315,6 +357,7 @@ Global flags (work with all commands):
 - **--dry-run**: Print commands without running them.
 - **--explain**: Add human-readable reasoning for each step.
 - **--no-colour**: Disable ANSI colours.
+- **--no-colour**: Disable ANSI colours.
 - **--prefix <path>**: Override install prefix.
 
 
@@ -339,12 +382,16 @@ The CLI does not implement package managers directly—it simply runs the comman
 
 ## Portable Prefix & PATH
 
+
 The toolbox prepends \`<prefix>/bin\` to \`PATH\` during command execution so that tools
 installed into the local prefix can be found immediately.
 
 
 Example:
 
+\`\`\` <br>
+python tools/toolbox.py --prefix ./.portable install bat <br>
+python tools/toolbox.py --prefix ./.portable verify bat 
 \`\`\` <br>
 python tools/toolbox.py --prefix ./.portable install bat <br>
 python tools/toolbox.py --prefix ./.portable verify bat 
@@ -413,11 +460,18 @@ python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1 <b
 python tools/toolbox.py net trace example.com <br>
 python tools/toolbox.py net dns-test example.com <br>
 python tools/toolbox.py net speed 
+python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1 <br>
+python tools/toolbox.py net trace example.com <br>
+python tools/toolbox.py net dns-test example.com <br>
+python tools/toolbox.py net speed 
 \`\`\`
 
 Guided actions require explicit confirmation:
 
 \`\`\`
+python tools/toolbox.py net flush-dns <br>
+python tools/toolbox.py net restart-network <br>
+python tools/toolbox.py net mtu-test 1.1.1.1 
 python tools/toolbox.py net flush-dns <br>
 python tools/toolbox.py net restart-network <br>
 python tools/toolbox.py net mtu-test 1.1.1.1 
@@ -430,11 +484,13 @@ python tools/toolbox.py net mtu-test 1.1.1.1
 
 
 List tools: <br>
+List tools: <br>
 \`\`\`
 python tools/toolbox.py list
 \`\`\`
 
 
+Search for security tools: <br>
 Search for security tools: <br>
 \`\`\`
 python tools/toolbox.py search security
@@ -442,18 +498,22 @@ python tools/toolbox.py search security
 
 
 Install and verify a tool with verbose output: <br>
+Install and verify a tool with verbose output: <br>
 \`\`\`
+python tools/toolbox.py --verbose install jq <br>
 python tools/toolbox.py --verbose install jq <br>
 python tools/toolbox.py --verbose verify jq
 \`\`\`
 
 
 Dry-run a command to preview actions: <br>
+Dry-run a command to preview actions: <br>
 \`\`\`
 python tools/toolbox.py --dry-run install nmap
 \`\`\`
 
 
+Explain what’s happening: <br>
 Explain what’s happening: <br>
 \`\`\`
 python tools/toolbox.py --explain update httpx
@@ -482,6 +542,7 @@ python tools/toolbox.py --explain update httpx
 ---
 
 
+## Helpful Tips
 ## Helpful Tips
 
 - **Tip #1:** \`--dry-run\` is your “break-glass” button—use it before you unleash anything scary.

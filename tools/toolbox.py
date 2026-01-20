@@ -17,7 +17,7 @@ REGISTRY_PATH = ROOT / "tools" / "registry.json"
 CONFIG_PATH = ROOT / ".config" / "toolbox.json"
 SHELL_INIT_PATH = ROOT / "shell" / "init.sh"
 
-COLOR_CODES = {
+colour_CODES = {
     "reset": "\033[0m",
     "red": "\033[31m",
     "green": "\033[32m",
@@ -34,7 +34,7 @@ class Context:
     verbose: bool
     dry_run: bool
     explain: bool
-    color: bool
+    colour: bool
     prefix: Path
 
 
@@ -94,31 +94,31 @@ def load_config() -> Dict[str, Any]:
     return load_json(CONFIG_PATH)
 
 
-def colorize(text: str, color: str, enabled: bool) -> str:
+def colourize(text: str, colour: str, enabled: bool) -> str:
     if not enabled:
         return text
-    return f"{COLOR_CODES.get(color, '')}{text}{COLOR_CODES['reset']}"
+    return f"{colour_CODES.get(colour, '')}{text}{colour_CODES['reset']}"
 
 
 def log_info(ctx: Context, message: str) -> None:
-    print(colorize(message, "cyan", ctx.color))
+    print(colourize(message, "cyan", ctx.colour))
 
 
 def log_warn(ctx: Context, message: str) -> None:
-    print(colorize(message, "yellow", ctx.color))
+    print(colourize(message, "yellow", ctx.colour))
 
 
 def log_error(ctx: Context, message: str) -> None:
-    print(colorize(message, "red", ctx.color), file=sys.stderr)
+    print(colourize(message, "red", ctx.colour), file=sys.stderr)
 
 
 def explain(ctx: Context, message: str) -> None:
     if ctx.explain:
-        print(colorize(f"[explain] {message}", "magenta", ctx.color))
+        print(colourize(f"[explain] {message}", "magenta", ctx.colour))
 
 
 def log_reason(ctx: Context, message: str) -> None:
-    print(colorize(f"[reason] {message}", "magenta", ctx.color))
+    print(colourize(f"[reason] {message}", "magenta", ctx.colour))
 
 
 def ensure_prefix(ctx: Context) -> None:
@@ -324,11 +324,11 @@ def is_installed(tool: Tool) -> bool:
 def list_tools(tools: List[Tool], ctx: Context) -> None:
     for tool in tools:
         status = "installed" if is_installed(tool) else "missing"
-        status_color = "green" if status == "installed" else "red"
+        status_colour = "green" if status == "installed" else "red"
         print(
-            f"{colorize(tool.name, 'bold', ctx.color)}\t"
+            f"{colourize(tool.name, 'bold', ctx.colour)}\t"
             f"{tool.category}\t"
-            f"{colorize(status, status_color, ctx.color)}\t"
+            f"{colourize(status, status_colour, ctx.colour)}\t"
             f"{tool.description}"
         )
 
@@ -350,7 +350,7 @@ def search_tools(tools: List[Tool], query: str, ctx: Context) -> None:
 
 def info_tool(tool: Tool, ctx: Context) -> None:
     installed = is_installed(tool)
-    print(colorize(tool.name, "bold", ctx.color))
+    print(colourize(tool.name, "bold", ctx.colour))
     print(f"  Category: {tool.category}")
     print(f"  Description: {tool.description}")
     print(f"  Source: {tool.source}")
@@ -397,8 +397,8 @@ def doctor(ctx: Context) -> None:
     }
     for name, path in checks.items():
         status = "ok" if path else "missing"
-        color = "green" if path else "red"
-        print(f"{colorize(name, 'bold', ctx.color)}\t{colorize(status, color, ctx.color)}")
+        colour = "green" if path else "red"
+        print(f"{colourize(name, 'bold', ctx.colour)}\t{colourize(status, colour, ctx.colour)}")
     print()
     print(f"Config: {CONFIG_PATH}")
     print(f"Registry: {REGISTRY_PATH}")
@@ -425,13 +425,13 @@ def path_doctor(ctx: Context) -> None:
         if not os.path.isdir(normalized):
             missing.append(normalized)
 
-    print(colorize("PATH diagnostics", "bold", ctx.color))
+    print(colourize("PATH diagnostics", "bold", ctx.colour))
     if duplicates:
-        print(colorize("Duplicate PATH entries:", "yellow", ctx.color))
+        print(colourize("Duplicate PATH entries:", "yellow", ctx.colour))
         for entry in duplicates:
             print(f"  - {entry}")
     else:
-        print(colorize("No duplicate PATH entries found.", "green", ctx.color))
+        print(colourize("No duplicate PATH entries found.", "green", ctx.colour))
 
     missing_unique = list(dict.fromkeys(missing))
     if missing_unique:
@@ -439,7 +439,7 @@ def path_doctor(ctx: Context) -> None:
         for entry in missing_unique:
             print(f"  - {entry}")
     else:
-        print(colorize("All PATH segments exist.", "green", ctx.color))
+        print(colourize("All PATH segments exist.", "green", ctx.colour))
 
 
 def detect_shell_rc() -> Path:
@@ -528,7 +528,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--verbose", action="store_true", help="Show commands before execution")
     parser.add_argument("--dry-run", action="store_true", help="Print commands without running them")
     parser.add_argument("--explain", action="store_true", help="Explain each step")
-    parser.add_argument("--no-color", action="store_true", help="Disable color output")
+    parser.add_argument("--no-colour", action="store_true", help="Disable colour output")
     parser.add_argument("--prefix", type=str, help="Install prefix for portable PATH")
 
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -601,12 +601,12 @@ def build_context(args: argparse.Namespace) -> Context:
     raw_prefix = Path(args.prefix or config.get("prefix", "./.tools"))
     prefix = raw_prefix if raw_prefix.is_absolute() else (ROOT / raw_prefix)
     prefix = prefix.resolve()
-    color = config.get("color", True) and not args.no_color
+    colour = config.get("colour", True) and not args.no_colour
     return Context(
         verbose=args.verbose,
         dry_run=args.dry_run,
         explain=args.explain,
-        color=color,
+        colour=colour,
         prefix=prefix,
     )
 
