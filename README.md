@@ -5,7 +5,7 @@ HelpBox by Perish
 
 
 <!-- Banner Image --> 
-![](/images/canva-logo-edited.png)
+![](/images/helpbox-banner.png)
 
 
 <!-- Catch Phrase -->  
@@ -27,6 +27,7 @@ HelpBox by Perish
   <a href="#features">Features</a>
   <a href="#usage">Usage</a>
   <a href="#toolbox-integration">Toolbox Integration</a>
+  ![](/images/helpbox-banner.png)
 </p>
 
 
