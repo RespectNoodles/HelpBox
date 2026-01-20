@@ -24,18 +24,16 @@ HelpBox by Perish
 
 <!-- Social Links -->  
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#toolbox-integration">Toolbox Integration</a> •
-  
-  
+  <a href="#features">Features</a>
+  <a href="#usage">Usage</a>
+  <a href="#toolbox-integration">Toolbox Integration</a>
 </p>
 
 
 --- 
 
 <p>
-<h3> This Tool Was Made By: <br>
+<h3> This Tool Was Made By:
 
 ### <h1> **Perish** </h1> <br>
 - <a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
@@ -44,8 +42,6 @@ HelpBox by Perish
 - <a href="https://steamcommunity.com/id/Perishexe/">**Steam**</a> <br>
 - <a href="https://discord.com/users/perish5514">Discord</a>
 </h3>
-
-</p>
 </p>
 
 ---
@@ -53,7 +49,7 @@ HelpBox by Perish
 
 ## Overview
 
-HelpBox is a portable, project-local tool registry and installer with a friendly CLI.
+HelpBox is a portable, project-local tool registry and installer with a friendly CLI. <br>
 It lets you list, install, update, and verify tools from a JSON registry while keeping installs
 inside a configurable prefix (default: \`./.tools\`) so projects stay self-contained.
 
@@ -110,26 +106,26 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 ## Quick Start
 
 1. **List tools**
-   \`\`\`
-   python tools/toolbox.py list
+   \`\`\` <br>
+   python tools/toolbox.py list <br>
    \`\`\`
 
 
 2. **Get info about a tool**
-   \`\`\`
-   python tools/toolbox.py info nmap
+   \`\`\` <br>
+   python tools/toolbox.py info nmap <br>
    \`\`\`
 
 
 3. **Install a tool into your portable prefix**
-   \`\`\`
-   python tools/toolbox.py install jq
+   \`\`\` <br>
+   python tools/toolbox.py install jq <br>
    \`\`\`
 
 
 4. **Verify a tool**
-   \`\`\`
-   python tools/toolbox.py verify jq
+   \`\`\` <br>
+   python tools/toolbox.py verify jq <br>
    \`\`\`
 
 
@@ -138,28 +134,29 @@ inside a configurable prefix (default: \`./.tools\`) so projects stay self-conta
 
 ## Download & Installation
 
-This part is written like a simple guide for younger learners. Slow and steady!
+I have written the following instructions taking into account that there are **beginners** out there. <br>
+Anyone *old*, *bald*, *small* or *big* should be able to follow along! Even **YOU!**
 
 ### Step 1: Get the project folder
 
 1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 2. Go to the folder where you keep projects.
-3. If someone shared this folder with you, open it. If not, type:
-   \`\`\`
-   git clone <project-url>
-   \`\`\`
-   Then move into the folder:
-   \`\`\`
-   cd <project-folder>
+3. If someone shared this folder with you, open it. If not, type: 
+   \`\`\` <br>
+   git clone <project-url> <br>
+   \`\`\` <br>
+   Then move into the folder: <br>
+   \`\`\` <br>
+   cd <project-folder> <br>
    \`\`\`
 
 
 ### Step 2: Look inside the folder
 
 1. Type this to see the files:
-   \`\`\`
-   ls
+   \`\`\` <br>
+   ls <br>
    \`\`\`
 2. You should see a **tools** folder and a **README.js** file.
 
@@ -167,8 +164,8 @@ This part is written like a simple guide for younger learners. Slow and steady!
 ### Step 3: Run the toolbox
 
 1. Type this to list the tools:
-   \`\`\`
-   python tools/toolbox.py list
+   \`\`\` <br>
+   python tools/toolbox.py list <br>
    \`\`\`
 2. If you see a list, it worked! 🎉
 
@@ -177,8 +174,8 @@ This part is written like a simple guide for younger learners. Slow and steady!
 
 1. Pick a tool name from the list, like **jq**.
 2. Type:
-   \`\`\`
-   python tools/toolbox.py install jq
+   \`\`\` <br>
+   python tools/toolbox.py install jq <br>
    \`\`\`
 3. Wait for it to finish.
 
@@ -186,8 +183,8 @@ This part is written like a simple guide for younger learners. Slow and steady!
 ### Step 5: Check the tool
 
 1. Type:
-   \`\`\`
-   python tools/toolbox.py verify jq
+   \`\`\` <br>
+   python tools/toolbox.py verify jq <br>
    \`\`\`
 2. If you see a version number, the tool is ready.
 
@@ -197,9 +194,9 @@ This part is written like a simple guide for younger learners. Slow and steady!
 You can put the tools in a special folder inside this project so they travel with you.
 
 1. Type:
-   \`\`\`
-   python tools/toolbox.py --prefix ./.portable install jq
-   \`\`\`
+   \`\`\` <br>
+   python tools/toolbox.py --prefix ./.portable install jq <br>
+   \`\`\` 
 2. Now the tool lives inside **.portable**.
 
 
@@ -220,8 +217,7 @@ The toolbox is built on three ideas:
 
 ## Project Layout
 
-\`\`\`
-./ <br>
+\`\`\` <br>
 ./ <br>
 ├── .config/
 │   └── toolbox.json         # Local configuration (prefix, colour) <br>
@@ -233,7 +229,7 @@ The toolbox is built on three ideas:
 ├── tools/ <br>
 │   ├── registry.json        # Tool registry <br>
 │   └── toolbox.py           # CLI entrypoint <br>
-└── README.js                # This manual 
+└── README.js                # This manual <br>
 \`\`\`
 
 
@@ -247,7 +243,8 @@ The registry is a JSON file located at \`tools/registry.json\`. <br>
 Each tool entry looks like this:
 
 
-\`\`\`json <br>
+\`\`\` <br>
+json <br>
 { <br>
   "name": "jq", <br>
   "category": "data", <br>
@@ -269,7 +266,7 @@ Each tool entry looks like this:
   "docs": "<https://jqlang.github.io/jq/>", <br>
   "requires_root": true, <br>
   "source": "apt" <br>
-}
+} <br>
 \`\`\`
 
 
@@ -294,10 +291,10 @@ Each tool entry looks like this:
 
 ## Configuration
 
-Local configuration lives at \`.config/toolbox.json\`:
+Local configuration lives at \`.config/toolbox.json\`: <br>
 
-
-\`\`\`json <br>
+\`\`\` <br>
+json <br>
 { <br>
   "prefix": "./.tools", <br>
   "colour": true <br>
@@ -323,8 +320,6 @@ You can override \`prefix\` per command using \`--prefix\`.
 
 ## Commands
 
-
-All commands are sub-commands on \`tools/toolbox.py\`:
 All commands are sub-commands on \`tools/toolbox.py\`:
 
 - **list**: Show all tools and their status.
@@ -334,6 +329,7 @@ All commands are sub-commands on \`tools/toolbox.py\`:
 - **update <tool>**: Run the tool's update command.
 - **verify <tool>**: Run the tool's verify command.
 - **doctor**: Check that required system commands exist.
+- **setup --theme <name>**: Install shell integration with prompt themes (`minimal`, `vivid`, `high-contrast`, `dark-contrast`).
 - **export**: Print registry JSON (or save to file).
 - **import**: Replace registry JSON from a file.
 - **tui**: Interactive selector (requires \`fzf\`).
@@ -383,18 +379,18 @@ The CLI does not implement package managers directly—it simply runs the comman
 ## Portable Prefix & PATH
 
 
-The toolbox prepends \`<prefix>/bin\` to \`PATH\` during command execution so that tools
-installed into the local prefix can be found immediately.
+The toolbox prepends \`<prefix>/bin\` to \`PATH\` during command execution 
+so that tools installed into the local prefix can be found immediately.
 
 
 Example:
 
 \`\`\` <br>
 python tools/toolbox.py --prefix ./.portable install bat <br>
-python tools/toolbox.py --prefix ./.portable verify bat 
+python tools/toolbox.py --prefix ./.portable verify bat <br>
 \`\`\` <br>
 python tools/toolbox.py --prefix ./.portable install bat <br>
-python tools/toolbox.py --prefix ./.portable verify bat 
+python tools/toolbox.py --prefix ./.portable verify bat <br>
 \`\`\`
 
 
@@ -402,7 +398,6 @@ python tools/toolbox.py --prefix ./.portable verify bat
 
 
 ## Verification & Doctor
-
 
 - **verify** runs the registry's verify command (often \`<tool> --version\`).
 - **doctor** checks if system dependencies (apt, pip, go, cargo, git, curl, fzf) are available.
@@ -413,20 +408,16 @@ python tools/toolbox.py --prefix ./.portable verify bat
 
 ## Import & Export
 
-
 Export the registry to a file:
 
-
+\`\`\` <br>
+python tools/toolbox.py export --output backup.json <br>
 \`\`\`
-python tools/toolbox.py export --output backup.json
-\`\`\`
-
 
 Import a registry file:
 
-
-\`\`\`
-python tools/toolbox.py import backup.json
+\`\`\` <br>
+python tools/toolbox.py import backup.json <br>
 \`\`\`
 
 
@@ -437,13 +428,12 @@ python tools/toolbox.py import backup.json
 
 If \`fzf\` is installed, you can run:
 
-
+\`\`\` <br>
+python tools/toolbox.py tui <br>
 \`\`\`
-python tools/toolbox.py tui
-\`\`\`
 
-
-You’ll get a searchable picker. Selecting a tool shows its info panel.
+- You’ll get a **searchable picker**. <br>
+- Selecting a *tool* shows its **info panel**.
 
 
 ---
@@ -455,26 +445,26 @@ You’ll get a searchable picker. Selecting a tool shows its info panel.
 - Use \`--explain\` to see intent for each step.
 - Network diagnostics are available under \`net\`:
 
-\`\`\`
+\`\`\` <br>
 python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1 <br>
 python tools/toolbox.py net trace example.com <br>
 python tools/toolbox.py net dns-test example.com <br>
-python tools/toolbox.py net speed 
+python tools/toolbox.py net speed <br>
 python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1 <br>
 python tools/toolbox.py net trace example.com <br>
 python tools/toolbox.py net dns-test example.com <br>
-python tools/toolbox.py net speed 
+python tools/toolbox.py net speed <br>
 \`\`\`
 
 Guided actions require explicit confirmation:
 
-\`\`\`
+\`\`\` <br>
 python tools/toolbox.py net flush-dns <br>
 python tools/toolbox.py net restart-network <br>
-python tools/toolbox.py net mtu-test 1.1.1.1 
+python tools/toolbox.py net mtu-test 1.1.1.1 <br>
 python tools/toolbox.py net flush-dns <br>
 python tools/toolbox.py net restart-network <br>
-python tools/toolbox.py net mtu-test 1.1.1.1 
+python tools/toolbox.py net mtu-test 1.1.1.1 <br>
 \`\`\`
 
 ---
@@ -482,41 +472,40 @@ python tools/toolbox.py net mtu-test 1.1.1.1
 
 ## Examples
 
-
 List tools: <br>
 List tools: <br>
-\`\`\`
-python tools/toolbox.py list
+\`\`\` <br>
+python tools/toolbox.py list <br>
 \`\`\`
 
 
 Search for security tools: <br>
 Search for security tools: <br>
-\`\`\`
-python tools/toolbox.py search security
+\`\`\` <br>
+python tools/toolbox.py search security <br>
 \`\`\`
 
 
 Install and verify a tool with verbose output: <br>
 Install and verify a tool with verbose output: <br>
-\`\`\`
+\`\`\` <br>
 python tools/toolbox.py --verbose install jq <br>
 python tools/toolbox.py --verbose install jq <br>
-python tools/toolbox.py --verbose verify jq
+python tools/toolbox.py --verbose verify jq <br>
 \`\`\`
 
 
 Dry-run a command to preview actions: <br>
 Dry-run a command to preview actions: <br>
-\`\`\`
-python tools/toolbox.py --dry-run install nmap
+\`\`\` <br>
+python tools/toolbox.py --dry-run install nmap <br>
 \`\`\`
 
 
 Explain what’s happening: <br>
 Explain what’s happening: <br>
-\`\`\`
-python tools/toolbox.py --explain update httpx
+\`\`\` <br>
+python tools/toolbox.py --explain update httpx <br>
 \`\`\`
 
 
@@ -524,7 +513,6 @@ python tools/toolbox.py --explain update httpx
 
 
 ## Troubleshooting
-
 
 - **Tool not found after install**
   - Confirm the tool is installed into \`<prefix>/bin\` and that your shell is using the right PATH.
@@ -542,7 +530,6 @@ python tools/toolbox.py --explain update httpx
 ---
 
 
-## Helpful Tips
 ## Helpful Tips
 
 - **Tip #1:** \`--dry-run\` is your “break-glass” button—use it before you unleash anything scary.
