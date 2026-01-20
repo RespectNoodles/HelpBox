@@ -117,6 +117,10 @@ def explain(ctx: Context, message: str) -> None:
         print(colorize(f"[explain] {message}", "magenta", ctx.color))
 
 
+def log_reason(ctx: Context, message: str) -> None:
+    print(colorize(f"[reason] {message}", "magenta", ctx.color))
+
+
 def ensure_prefix(ctx: Context) -> None:
     for subdir in ("bin", "tmp"):
         (ctx.prefix / subdir).mkdir(parents=True, exist_ok=True)
@@ -145,6 +149,165 @@ def run_command(command: str, ctx: Context, reason: Optional[str] = None) -> int
         return subprocess.call(formatted, shell=True, env=build_env(ctx))
     except OSError as exc:
         raise ToolboxError(f"Failed to run command: {formatted}") from exc
+
+
+def run_logged_command(command: str, ctx: Context, reason: str) -> int:
+    log_reason(ctx, reason)
+    formatted = format_command(command, ctx)
+    log_info(ctx, f"$ {formatted}")
+    if ctx.dry_run:
+        return 0
+    try:
+        return subprocess.call(formatted, shell=True, env=build_env(ctx))
+    except OSError as exc:
+        raise ToolboxError(f"Failed to run command: {formatted}") from exc
+
+
+def confirm_action(ctx: Context, prompt: str) -> bool:
+    log_warn(ctx, prompt)
+    try:
+        response = input("Type 'yes' to continue: ").strip().lower()
+    except EOFError:
+        return False
+    return response == "yes"
+
+
+def detect_wsl() -> bool:
+    if os.environ.get("WSLENV") or os.environ.get("WSL_DISTRO_NAME"):
+        return True
+    try:
+        version = Path("/proc/version").read_text(encoding="utf-8").lower()
+    except OSError:
+        return False
+    return "microsoft" in version or "wsl" in version
+
+
+def pick_available_command(candidates: Iterable[str]) -> Optional[str]:
+    for candidate in candidates:
+        name = candidate.split()[0]
+        if shutil.which(name):
+            return candidate
+    return None
+
+
+def net_ping(args: argparse.Namespace, ctx: Context) -> int:
+    cmd = f"ping -c {args.count} -s {args.size} -i {args.interval} {args.host}"
+    reason = "Send ICMP echo requests to measure reachability and latency."
+    return run_logged_command(cmd, ctx, reason)
+
+
+def net_trace(args: argparse.Namespace, ctx: Context) -> int:
+    cmd = pick_available_command(
+        [
+            f"mtr -rw -c {args.count} {args.host}",
+            f"traceroute {args.host}",
+            f"tracepath {args.host}",
+        ]
+    )
+    if not cmd:
+        log_warn(ctx, "No traceroute tool found (mtr, traceroute, or tracepath).")
+        return 1
+    reason = "Trace the network path and hop latency to the target."
+    return run_logged_command(cmd, ctx, reason)
+
+
+def net_dns_test(args: argparse.Namespace, ctx: Context) -> int:
+    cmd = pick_available_command(
+        [
+            f"dig {args.host} +short",
+            f"nslookup {args.host}",
+            f"getent hosts {args.host}",
+        ]
+    )
+    if not cmd:
+        log_warn(ctx, "No DNS lookup tool found (dig, nslookup, or getent).")
+        return 1
+    reason = "Query DNS to validate resolution for the target host."
+    return run_logged_command(cmd, ctx, reason)
+
+
+def net_speed(ctx: Context) -> int:
+    cmd = pick_available_command(
+        [
+            "speedtest --accept-license --accept-gdpr",
+            "speedtest-cli",
+            "fast",
+        ]
+    )
+    if not cmd:
+        log_warn(ctx, "No speed test tool found (speedtest, speedtest-cli, or fast).")
+        return 1
+    reason = "Run a bandwidth test to estimate download/upload performance."
+    return run_logged_command(cmd, ctx, reason)
+
+
+def net_flush_dns(ctx: Context) -> int:
+    tool = pick_available_command(["resolvectl", "systemd-resolve"])
+    if not tool:
+        log_warn(ctx, "No supported DNS cache tool found (resolvectl/systemd-resolve).")
+        return 1
+    warning = (
+        "WARNING: This will flush system DNS caches via systemd-resolved. "
+        "It is safe but can disrupt active DNS queries."
+    )
+    if not confirm_action(ctx, warning):
+        log_warn(ctx, "DNS flush canceled.")
+        return 1
+    stats_cmd = "resolvectl statistics" if "resolvectl" in tool else "systemd-resolve --statistics"
+    flush_cmd = "resolvectl flush-caches" if "resolvectl" in tool else "systemd-resolve --flush-caches"
+    run_logged_command(stats_cmd, ctx, "Show current DNS cache statistics before flushing.")
+    result = run_logged_command(flush_cmd, ctx, "Flush systemd-resolved DNS caches.")
+    run_logged_command(stats_cmd, ctx, "Show DNS cache statistics after flushing.")
+    return result
+
+
+def net_restart_network(ctx: Context) -> int:
+    if detect_wsl():
+        log_warn(ctx, "WSL detected; skipping network restart for safety.")
+        return 1
+    warning = (
+        "WARNING: This will restart system networking services and may disrupt connectivity."
+    )
+    if not confirm_action(ctx, warning):
+        log_warn(ctx, "Network restart canceled.")
+        return 1
+    if shutil.which("nmcli"):
+        result = run_logged_command("nmcli networking off", ctx, "Disable NetworkManager networking.")
+        result = run_logged_command("nmcli networking on", ctx, "Re-enable NetworkManager networking.")
+        return result
+    if shutil.which("systemctl"):
+        return run_logged_command(
+            "systemctl restart NetworkManager",
+            ctx,
+            "Restart the NetworkManager system service.",
+        )
+    if shutil.which("service"):
+        return run_logged_command(
+            "service network-manager restart",
+            ctx,
+            "Restart the network-manager service.",
+        )
+    log_warn(ctx, "No supported network restart command found.")
+    return 1
+
+
+def net_mtu_test(args: argparse.Namespace, ctx: Context) -> int:
+    warning = (
+        "This MTU test sends pings with the Don't Fragment flag to estimate "
+        "path MTU. It does not change system settings."
+    )
+    if not confirm_action(ctx, warning):
+        log_warn(ctx, "MTU test canceled.")
+        return 1
+    sizes = [1200, 1400, 1472]
+    result = 0
+    for size in sizes:
+        cmd = f"ping -c {args.count} -M do -s {size} {args.host}"
+        reason = f"Probe MTU using payload size {size} bytes."
+        result = run_logged_command(cmd, ctx, reason)
+        if result != 0:
+            break
+    return result
 
 
 def find_tool(tools: Iterable[Tool], name: str) -> Tool:
@@ -372,6 +535,31 @@ def parse_args() -> argparse.Namespace:
 
     subparsers.add_parser("list", help="List tools")
 
+    net_parser = subparsers.add_parser("net", help="Network diagnostic utilities")
+    net_subparsers = net_parser.add_subparsers(dest="net_command", required=True)
+
+    ping_parser = net_subparsers.add_parser("ping", help="Ping a host")
+    ping_parser.add_argument("host", help="Host to ping")
+    ping_parser.add_argument("--count", type=int, default=4, help="Number of echo requests")
+    ping_parser.add_argument("--size", type=int, default=56, help="Payload size in bytes")
+    ping_parser.add_argument("--interval", type=float, default=1.0, help="Interval between packets")
+
+    trace_parser = net_subparsers.add_parser("trace", help="Trace route to a host")
+    trace_parser.add_argument("host", help="Host to trace")
+    trace_parser.add_argument("--count", type=int, default=5, help="Number of cycles (mtr)")
+
+    dns_parser = net_subparsers.add_parser("dns-test", help="Run DNS lookup for a host")
+    dns_parser.add_argument("host", help="Host to resolve")
+
+    net_subparsers.add_parser("speed", help="Run a bandwidth test (if available)")
+
+    net_subparsers.add_parser("flush-dns", help="Flush DNS caches (requires confirmation)")
+    net_subparsers.add_parser("restart-network", help="Restart networking services (requires confirmation)")
+
+    mtu_parser = net_subparsers.add_parser("mtu-test", help="Run safe MTU probe tests")
+    mtu_parser.add_argument("host", nargs="?", default="1.1.1.1", help="Host to probe")
+    mtu_parser.add_argument("--count", type=int, default=1, help="Ping count per size")
+
     search_parser = subparsers.add_parser("search", help="Search tools")
     search_parser.add_argument("query")
 
@@ -451,6 +639,22 @@ def main() -> int:
             import_registry(Path(args.input))
         elif args.command == "tui":
             run_tui(tools, ctx)
+        elif args.command == "net":
+            if args.net_command == "ping":
+                return net_ping(args, ctx)
+            if args.net_command == "trace":
+                return net_trace(args, ctx)
+            if args.net_command == "dns-test":
+                return net_dns_test(args, ctx)
+            if args.net_command == "speed":
+                return net_speed(ctx)
+            if args.net_command == "flush-dns":
+                return net_flush_dns(ctx)
+            if args.net_command == "restart-network":
+                return net_restart_network(ctx)
+            if args.net_command == "mtu-test":
+                return net_mtu_test(args, ctx)
+            raise ToolboxError(f"Unknown net command: {args.net_command}")
         else:
             raise ToolboxError(f"Unknown command: {args.command}")
     except ToolboxError as exc:
