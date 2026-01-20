@@ -35,14 +35,35 @@
 
 <h3> Made By 
   <br>
-||  Egman23  |  Perish  |  RespectNoodles  || 
+|1|  RespectNoodles  ||
+|2|   Egman23    ||
+|3|  Perish  || 
 </h3>
+
 
 ---
 
 
-## Index
+## Overview
 
+HelpBox is a portable, project-local tool registry and installer with a friendly CLI.
+It lets you list, install, update, and verify tools from a JSON registry while keeping installs
+inside a configurable prefix (default: \`./.tools\`) so projects stay self-contained.
+
+### Key Features
+
+- Registry-driven tool definitions with install/update/verify commands.
+- Portable prefix for project-local installations.
+- Safety knobs: \`--verbose\`, \`--dry-run\`, and \`--explain\`.
+- Network diagnostics under \`net\` with guided confirmations for disruptive actions.
+
+### Requirements
+
+- Python 3.8+
+- A package manager or tools referenced by your registry entries (e.g., \`apt-get\`)
+
+
+## Index
 
 1. [Quick Start](#quick-start)
 2. [Download & Installation](#download--installation)
@@ -66,7 +87,6 @@
 
 
 ## Quick Start
-
 
 1. **List tools**
    \`\`\`
@@ -136,7 +156,7 @@ This part is written like a simple guide for younger learners. Slow and steady!
 2. If you see a list, it worked! 🎉
 
 
-### Step 4: Install a tool (with help)
+### Step 4: Install a tool
 
 
 1. Pick a tool name from the list, like **jq**.
