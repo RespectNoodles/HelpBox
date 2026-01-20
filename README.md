@@ -4,7 +4,7 @@
 
 
 <!-- Banner Image --> 
-![](/images/egman-toolbox-bg-resized.png)
+![](/images/canva-logo-edited.png)
 
 
 <!-- Catch Phrase -->  
