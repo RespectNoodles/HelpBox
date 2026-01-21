@@ -1,0 +1,28 @@
+{
+  "presets": [
+    {
+      "name": "nmap-quick-scan",
+      "description": "Fast scan for common ports with service detection.",
+      "examples": [
+        "nmap -sV -T4 -F 192.168.1.1",
+        "nmap -sV -T4 -F scanme.nmap.org"
+      ]
+    },
+    {
+      "name": "ping-latency-check",
+      "description": "Basic latency check with a fixed count.",
+      "examples": [
+        "ping -c 5 1.1.1.1",
+        "ping -c 5 google.com"
+      ]
+    },
+    {
+      "name": "httpx-status-probe",
+      "description": "Probe a host list and show status codes.",
+      "examples": [
+        "cat hosts.txt | httpx -status-code -title",
+        "httpx -l hosts.txt -status-code -title"
+      ]
+    }
+  ]
+}
