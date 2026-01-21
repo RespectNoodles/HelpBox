@@ -37,7 +37,8 @@ HelpBox by Perish
 
 ![](/images/perish-logo-ss.png)
 
-### <h1> Perish </h1> <br>
+### <h1> Perish </h1> 
+
 <p>
   <h3>
   - <a href="https://discord.com/users/perish5514">My Discord</a> <br>
