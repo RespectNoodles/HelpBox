@@ -29,15 +29,19 @@ HelpBox by Perish
   <a href="#toolbox-integration">Toolbox Integration</a>
 </p> <br>
 
-
-![](/images/helpbox-logo.png)
-
 --- 
 
 <p>
-<h3> This Tool Was Made By:
+<h3> This Tool Was Made By: </h3>
+</p>
+  
+![](/images/perish-logo-ss.png)
 
+
+<p>
 ### <h1> **Perish** </h1> <br>
+
+<h3>
 - <a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
 - <a href="https://www.instagram.com/cj_egg/">**Instagram**</a> <br>
 - <a href="https://www.facebook.com/c.j.egan.738639/">**Facebook**</a> <br>
