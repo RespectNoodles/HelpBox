@@ -25,6 +25,12 @@ toolbox_prompt_apply_bash() {
       time_colour="${bold}\[\e[91m\]"
       dir_colour="${bold}\[\e[96m\]"
       ;;
+      dark-contrast)
+      user_colour="\[\e[48;5;236m\]\[\e[38;5;82m\]"
+      host_colour="\[\e[48;5;236m\]\[\e[38;5;213m\]"
+      time_colour="\[\e[48;5;236m\]\[\e[38;5;141m\]"
+      dir_colour="\[\e[48;5;236m\]\[\e[38;5;220m\]"
+      ;;
     *)
       return 0
       ;;
@@ -55,6 +61,12 @@ toolbox_prompt_apply_zsh() {
       time_colour="${bold}%F{red}"
       dir_colour="${bold}%F{cyan}"
       ;;
+      dark-contrast)
+      user_colour="%K{236}%F{82}"
+      host_colour="%K{236}%F{213}"
+      time_colour="%K{236}%F{141}"
+      dir_colour="%K{236}%F{220}"
+      ;;
     *)
       return 0
       ;;
@@ -72,7 +84,7 @@ toolbox_prompt_apply() {
 
 toolbox_prompt_set_theme() {
   case "$1" in
-    minimal|vivid|high-contrast)
+    minimal|vivid|high-contrast|dark-contrast)
       toolbox_prompt_theme="$1"
       ;;
   esac
