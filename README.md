@@ -37,10 +37,8 @@ HelpBox by Perish
   
 ![](/images/perish-logo-ss.png)
 
-
+### <h1> Perish </h1> <br>
 <p>
-### <h1> **Perish** </h1> <br>
-
 <h3>
 - <a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
 - <a href="https://www.instagram.com/cj_egg/">**Instagram**</a> <br>
