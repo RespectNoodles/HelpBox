@@ -105,8 +105,12 @@ It lets you: <br>
 14. [Usage Notes](#usage-notes)
 15. [Examples](#examples)
 16. [Troubleshooting](#troubleshooting)
-17. [Helpful Tips](#helpful-tips)
-17. [Helpful Tips](#helpful-tips)
+17. [Cheeky Tips](#cheeky-tips)
+14. [Hakd Quick Interface](#hakd-quick-interface)
+15. [Usage Notes](#usage-notes)
+16. [Examples](#examples)
+17. [Troubleshooting](#troubleshooting)
+18. [Cheeky Tips](#cheeky-tips)
 
 
 ---
@@ -445,11 +449,41 @@ python tools/toolbox.py tui <br>
 ---
 
 
+## Hakd Quick Interface
+
+
+For a fast, key-driven helper UI, run:
+
+\`\`\`
+hakd
+\`\`\`
+
+If \`hakd\` isn’t in your PATH yet, run it directly: <br>
+
+\`\`\` <br>
+python tools/hakd.py <br>
+\`\`\`
+
+Available keys:
+
+- **[T]**: list tools
+- **[I]**: show info for a tool
+- **[P]**: list presets/templates
+- **[D]**: doctor check
+- **[U]**: update all tools (and self-update if the repo is clean)
+- **[S]**: search tools
+- **[H]**: show help
+- **[Q]**: quit
+
+
+---
+
+
 ## Usage Notes
 
 - Use \`--dry-run\` to preview commands without running them.
 - Use \`--explain\` to see intent for each step.
-- Network diagnostics are available under \`net\`:
+- Network diagnostics are available under \`net\`: <br>
 
 \`\`\` <br>
 python tools/toolbox.py net ping example.com --count 4 --size 56 --interval 1 <br>
