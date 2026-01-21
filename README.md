@@ -27,26 +27,26 @@ HelpBox by Perish
   <a href="#features">Features</a>
   <a href="#usage">Usage</a>
   <a href="#toolbox-integration">Toolbox Integration</a>
-</p> <br>
+  </p> 
 
 --- 
 
-<p>
-<h3> This Tool Was Made By: </h3>
-</p>
-  
+<h3> 
+  This Tool Was Made By: 
+  </h3>
+
 ![](/images/perish-logo-ss.png)
 
 ### <h1> Perish </h1> <br>
 <p>
-<h3>
-- <a href="https://github.com/RespectNoodles">**GitHub**</a> <br>
-- <a href="https://www.instagram.com/cj_egg/">**Instagram**</a> <br>
-- <a href="https://www.facebook.com/c.j.egan.738639/">**Facebook**</a> <br>
-- <a href="https://steamcommunity.com/id/Perishexe/">**Steam**</a> <br>
-- <a href="https://discord.com/users/perish5514">Discord</a>
-</h3>
-</p>
+  <h3>
+  - <a href="https://discord.com/users/perish5514">My Discord</a> <br>
+  - <a href="https://www.facebook.com/c.j.egan.738639/">My Facebook</a> <br>
+  - <a href="https://github.com/RespectNoodles">My GitHub</a> <br>
+  - <a href="https://www.instagram.com/cj_egg/">My Instagram</a> <br>
+  - <a href="https://steamcommunity.com/id/Perishexe/">My Steam</a> <br>
+  </h3>
+  </p>
 
 ---
 
@@ -54,8 +54,13 @@ HelpBox by Perish
 ## Overview
 
 HelpBox is a portable, project-local tool registry and installer with a friendly CLI. <br>
-It lets you list, install, update, and verify tools from a JSON registry while keeping installs
-inside a configurable prefix (default: \`./.tools\`) so projects stay self-contained.
+It lets you: <br>
+- **List**, <br>
+- **Install**, <br>
+- **Update** and <br>
+- **Verify** <br>
+..Tools from a JSON registry. <br>
+(*All while keeping installs inside a configurable prefix (default: \`./.tools\`) so projects stay self-contained*)
 
 ### Key Features
 
