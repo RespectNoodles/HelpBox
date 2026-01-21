@@ -60,7 +60,7 @@ It lets you: <br>
 - **Install**, <br>
 - **Update** and <br>
 - **Verify** <br>
-..Tools from a JSON registry. <br>
+..tools from a JSON registry. <br> <br>
 (*All while keeping installs inside a configurable prefix (default: \`./.tools\`) so projects stay self-contained*)
 
 ### Key Features
