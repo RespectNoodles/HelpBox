@@ -580,7 +580,7 @@ def parse_args() -> argparse.Namespace:
     setup_parser = subparsers.add_parser("setup", help="Install shell integration")
     setup_parser.add_argument(
         "--theme",
-        choices=["minimal", "vivid", "high-contrast"],
+        choices=["minimal", "vivid", "high-contrast", "dark-contrast"],
         default="minimal",
         help="Prompt theme profile",
     )
