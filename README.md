@@ -23,17 +23,16 @@ HelpBox by Perish
 
 
 <!-- Social Links -->  
-<p align="center">
+<p align="center"> <h1>
   <a href="#features">Features</a>
   <a href="#usage">Usage</a>
   <a href="#toolbox-integration">Toolbox Integration</a>
-  </p> 
+  </h1></p> 
 
 --- 
 
 <h3> 
-  This Tool Was Made By: 
-  </h3>
+  This Tool Was Made By: </h3>
 
 ![](/images/perish-logo-ss.png)
 
@@ -115,25 +114,25 @@ It lets you: <br>
 
 ## Quick Start
 
-1. **List tools**
+1. **List tools** <br>
    \`\`\` <br>
    python tools/toolbox.py list <br>
    \`\`\`
 
 
-2. **Get info about a tool**
+2. **Get info about a tool** <br>
    \`\`\` <br>
    python tools/toolbox.py info nmap <br>
    \`\`\`
 
 
-3. **Install a tool into your portable prefix**
+3. **Install a tool into your portable prefix** <br>
    \`\`\` <br>
    python tools/toolbox.py install jq <br>
    \`\`\`
 
 
-4. **Verify a tool**
+4. **Verify a tool** <br>
    \`\`\` <br>
    python tools/toolbox.py verify jq <br>
    \`\`\`
@@ -152,7 +151,7 @@ Anyone *old*, *bald*, *small* or *big* should be able to follow along! Even **YO
 1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 1. Open a **terminal** window (**Win** + **R** -> Type: **cmd** -> **Shift** + **Enter** Key).
 2. Go to the folder where you keep projects.
-3. If someone shared this folder with you, open it. If not, type: 
+3. If someone shared this folder with you, open it. If not, type: <br>
    \`\`\` <br>
    git clone <project-url> <br>
    \`\`\` <br>
@@ -164,46 +163,46 @@ Anyone *old*, *bald*, *small* or *big* should be able to follow along! Even **YO
 
 ### Step 2: Look inside the folder
 
-1. Type this to see the files:
+1. Type this to see the files: <br>
    \`\`\` <br>
    ls <br>
-   \`\`\`
+   \`\`\` <br>
 2. You should see a **tools** folder and a **README.js** file.
 
 
 ### Step 3: Run the toolbox
 
-1. Type this to list the tools:
+1. Type this to list the tools: <br>
    \`\`\` <br>
    python tools/toolbox.py list <br>
-   \`\`\`
+   \`\`\` <br>
 2. If you see a list, it worked! 🎉
 
 
 ### Step 4: Install a tool
 
 1. Pick a tool name from the list, like **jq**.
-2. Type:
+2. Type: <br>
    \`\`\` <br>
    python tools/toolbox.py install jq <br>
-   \`\`\`
+   \`\`\` <br>
 3. Wait for it to finish.
 
 
 ### Step 5: Check the tool
 
-1. Type:
+1. Type: <br>
    \`\`\` <br>
    python tools/toolbox.py verify jq <br>
-   \`\`\`
+   \`\`\` <br>
 2. If you see a version number, the tool is ready.
 
 
-### Step 6: Keep it portable (like a backpack)
+### Step 6: Keep it portable (like a backpack)  <br>
 
-You can put the tools in a special folder inside this project so they travel with you.
+You can put the tools in a special folder inside this project so they travel with you. 
 
-1. Type:
+1. Type:  <br>
    \`\`\` <br>
    python tools/toolbox.py --prefix ./.portable install jq <br>
    \`\`\` 
@@ -215,11 +214,11 @@ You can put the tools in a special folder inside this project so they travel wit
 
 ## Concepts
 
-The toolbox is built on three ideas:
+The toolbox is built on three ideas:  <br>
 
-- **Registry-driven**: Tools are described in a JSON registry with install, update, and verify commands.
-- **Portable by design**: All installs can target a local prefix (default: \`./.tools\`).
-- **Safety knobs**: \`--verbose\`, \`--dry-run\`, and \`--explain\` let you see and understand every step.
+1. **Registry-driven**: Tools are described in a JSON registry with install, update, and verify commands.  <br>
+2. **Portable by design**: All installs can target a local prefix (default: \`./.tools\`).  <br>
+3. **Safety knobs**: \`--verbose\`, \`--dry-run\`, and \`--explain\` let you see and understand every step. 
 
 
 ---
@@ -250,8 +249,7 @@ The toolbox is built on three ideas:
 
 The registry is a JSON file located at \`tools/registry.json\`. <br>
 The registry is a JSON file located at \`tools/registry.json\`. <br>
-Each tool entry looks like this:
-
+Each tool entry looks like this:  <br>
 
 \`\`\` <br>
 json <br>
@@ -282,8 +280,6 @@ json <br>
 
 ---
 
-
-## Fields:
 
 ## Fields:
 
@@ -393,7 +389,7 @@ The toolbox prepends \`<prefix>/bin\` to \`PATH\` during command execution
 so that tools installed into the local prefix can be found immediately.
 
 
-Example:
+Example:  <br>
 
 \`\`\` <br>
 python tools/toolbox.py --prefix ./.portable install bat <br>
@@ -418,13 +414,13 @@ python tools/toolbox.py --prefix ./.portable verify bat <br>
 
 ## Import & Export
 
-Export the registry to a file:
+Export the registry to a file:  <br>
 
 \`\`\` <br>
 python tools/toolbox.py export --output backup.json <br>
 \`\`\`
 
-Import a registry file:
+Import a registry file:  <br>
 
 \`\`\` <br>
 python tools/toolbox.py import backup.json <br>
@@ -434,13 +430,13 @@ python tools/toolbox.py import backup.json <br>
 ---
 
 
-## Interactive TUI
+## Interactive TUI 
 
 If \`fzf\` is installed, you can run:
 
 \`\`\` <br>
 python tools/toolbox.py tui <br>
-\`\`\`
+\`\`\`  <br>
 
 - You’ll get a **searchable picker**. <br>
 - Selecting a *tool* shows its **info panel**.
@@ -466,7 +462,7 @@ python tools/toolbox.py net dns-test example.com <br>
 python tools/toolbox.py net speed <br>
 \`\`\`
 
-Guided actions require explicit confirmation:
+Guided actions require explicit confirmation:  <br>
 
 \`\`\` <br>
 python tools/toolbox.py net flush-dns <br>
